@@ -26,6 +26,18 @@ class Seat:
             return prev_occupant
         else:
             return "no occupant to remove"
+    def __str__(self) -> str:
+        """
+        Returns the string representation of this object
+        """
+        output = []
+        for table_number, table in enumerate(self.tables, start=1):
+            output.append(f"Table {table_number}:")
+            for seat in table.seats:
+                occupant = seat.occupant if seat.occupant else "Empty"
+                output.append(f"  Seat: {occupant}")
+            output.append("") 
+        return "\n".join(output)
         
 class Table:
     def __init__(self, capacity:int) -> None:
@@ -64,3 +76,15 @@ class Table:
             if seat.free == True:
                 counter += 1
         return counter
+    def __str__(self) -> str:
+        """
+        Returns the string representation of this object
+        """
+        output = []
+        for table_number, table in enumerate(self.tables, start=1):
+            output.append(f"Table {table_number}:")
+            for seat in table.seats:
+                occupant = seat.occupant if seat.occupant else "Empty"
+                output.append(f"  Seat: {occupant}")
+            output.append("") 
+        return "\n".join(output)
