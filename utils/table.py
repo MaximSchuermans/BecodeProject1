@@ -38,6 +38,11 @@ class Seat:
                 output.append(f"  Seat: {occupant}")
             output.append("") 
         return "\n".join(output)
+    def __str__(self) -> str:
+        if self.free == True:
+            return "Seat is free"
+        else:
+            return f'Seat is occupied by {self.occupant}'
         
 class Table:
     def __init__(self, capacity:int) -> None:
@@ -65,8 +70,6 @@ class Table:
                 if seat.free == True:
                     seat.set_occupant(name)
                     
-                    
-
     def left_capacity(self) -> int:
         """
         returns left seats with an integer
@@ -77,14 +80,8 @@ class Table:
                 counter += 1
         return counter
     def __str__(self) -> str:
-        """
-        Returns the string representation of this object
-        """
-        output = []
-        for table_number, table in enumerate(self.tables, start=1):
-            output.append(f"Table {table_number}:")
-            for seat in table.seats:
-                occupant = seat.occupant if seat.occupant else "Empty"
-                output.append(f"  Seat: {occupant}")
-            output.append("") 
-        return "\n".join(output)
+        counter = 0
+        for seat in self.seats:
+            if seat.free == False:
+                counter += 1
+        return f'Table capacity is {self.capacity} with {counter} seats taken '
