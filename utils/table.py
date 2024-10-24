@@ -28,7 +28,7 @@ class Seat:
             return "no occupant to remove"
         
 class Table:
-    def __init__(self, capacity:int) -> None:
+    def __init__(self, capacity:int = 4) -> None:
         self.capacity = capacity
         self.seats = list_of_seat_objects
 
