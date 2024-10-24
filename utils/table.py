@@ -1,6 +1,6 @@
 # from module import whateveryouneed 
 class Seat:
-    def __init__(self, free:bool, occupant:str ) -> None:
+    def __init__(self, free=False, occupant=None) -> None:
         self.free = free
         self.occupant = occupant
 
@@ -30,7 +30,9 @@ class Seat:
 class Table:
     def __init__(self, capacity:int) -> None:
         self.capacity = capacity
-        self.seats = list_of_seat_objects
+        self.seats = []
+        for i in range (0,5):
+            self.seats.append(Seat())
 
     def has_free_spot(self) ->bool:
         """
@@ -46,17 +48,18 @@ class Table:
         """
         places someone at the table
         """
-        if self.has_free_spot(self) == True:
+        if self.has_free_spot() == True:
             for seat in self.seats:
                 if seat.free == True:
                     seat.set_occupant(name)
+                    
                     
 
     def left_capacity(self) -> int:
         """
         returns left seats with an integer
         """
-        counnter = 0
+        counter = 0
         for seat in self.seats:
             if seat.free == True:
                 counter += 1
