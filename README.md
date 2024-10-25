@@ -12,5 +12,7 @@ python3 -m venv ./venv
 source ./venv/bin/activate
 pip install pandas
 pip install pyyaml
+pip install openpyxl
+pip install -r requirements.txt
 ```
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
