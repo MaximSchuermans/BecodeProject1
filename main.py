@@ -10,4 +10,4 @@ names = read_xls(file)
 room = Openspace(names)
 room.organize()
 print(room)
-
+room.store("writefile.xlsx")

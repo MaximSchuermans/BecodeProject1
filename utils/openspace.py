@@ -1,9 +1,10 @@
-#from table.py import Table
 from .table import Table
-#from . import table
-#from ./table import Table
 from typing import List
 from random import choice, randrange
+from pandas import DataFrame
+from numpy.random import randn
+from numpy import empty
+from numpy.dtypes import StringDType
 
 class Openspace:
 
@@ -70,18 +71,14 @@ class Openspace:
         """
         Stores the repartition in an Excel file.
         """
-        data = []
-        for table_number, table in enumerate(self.tables, start=1):
-            for seat_number, seat in enumerate(table.seats, start=1):
-                occupant = seat.occupant if seat.occupant == True else "Empty"
-                data.append({
-                    "Table": table_number,
-                    "Seat": seat_number,
-                    "Occupant": occupant
-                })
-        df = pd.DataFrame(data)
-        df.to_excel(filename, index=False)    
-        pass
+        arr = empty([5,7], dtype=StringDType())
+                
+        for i, table in enumerate(self.tables):
+            for n, seat in enumerate(table.seats):
+                arr[n][i] = seat.occupant
+        dataframe = DataFrame(arr)
+        print(dataframe)
+        dataframe.to_excel(filename, index=False)
 
     def __str__(self) -> str:
         """
