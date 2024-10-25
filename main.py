@@ -5,7 +5,6 @@ from utils.openspace import Openspace
 config = safe_load(open('config.yaml'))
 file = config['file']
 names = read_xls(file)
-print(names)
 
 #Initialize the default 6 tables with 4 seats
 room = Openspace(names)

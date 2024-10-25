@@ -3,6 +3,7 @@ from .table import Table
 #from . import table
 #from ./table import Table
 from typing import List
+from random import choice, randrange
 
 class Openspace:
 
@@ -10,7 +11,7 @@ class Openspace:
         self.tables: List[Table] = [Table() for i in range(0, number_of_tables + 1)]
         self.number_of_tables: int = number_of_tables
         self.seated: List[str] = []
-        self.usneated: List[str] = [person for person in names]
+        self.unseated: List[str] = [person for person in names]
 
     def organize(self) -> None:
         """
@@ -21,17 +22,29 @@ class Openspace:
         if len(self.unseated) >= 24:
             for table in self.tables:
                 for i in range(0, 7):
-                    person = rand.choice(self.unseated)
+                    if table.has_free_spot() != True:
+                        continue
+                    if len(self.unseated) == 0:
+                        break
+                    #person = choice(self.unseated)
+                    num = randrange(0,len(self.unseated))
+                    person = self.unseated[num]
                     # Update the lists of seated and unseated people
                     self.update_seats(person, table)
         elif len(self.unseated) % 6 != 1:
+            print("inside elifloop")
             # Fill the tables with 6 people such that there will be no table with only 1 peron
             while len(self.unseated) != 0:
                 for table in self.tables:
                     if table.left_capacity == 0:
                         continue
-                    person = rand.choice(self.unseated)
+                    #person = choice(self.unseated)
+                    num = randrange(0,len(self.unseated)+1)
+                    person = self.unseated[num]
+                    print(num,person)
                     self.update_seats(person, table)
+        else:
+            print("else statesment")
                     
 
     def update_seats(self, name, table):

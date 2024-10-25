@@ -48,27 +48,25 @@ class Table:
     def __init__(self, capacity:int = 4) -> None:
         self.capacity = capacity
         self.seats = []
-        for i in range (0,5):
-            self.seats.append(Seat())
 
     def has_free_spot(self) ->bool:
         """
         returns a bool if a spot is available
         """
-        for seat in self.seats:
-            if seat.free == True:
-                return True
-            else:
-                return False
+        if self.capacity == 0:
+            return False
+        return True    
         
     def assign_seat(self, name) -> None:
         """
         places someone at the table
         """
-        if self.has_free_spot() == True:
+        '''if self.has_free_spot() == True:
             for seat in self.seats:
                 if seat.free == True:
-                    seat.set_occupant(name)
+                    seat.set_occupant(name)'''
+        self.seats.append(Seat(occupant=name))
+        self.capacity -= 1
                     
     def left_capacity(self) -> int:
         """
