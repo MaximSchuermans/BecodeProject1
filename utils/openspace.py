@@ -6,6 +6,7 @@ from numpy.random import randn
 from numpy import empty
 from numpy.dtypes import StringDType
 
+
 class Openspace:
 
     def __init__(self, names: List[str], number_of_tables=6) -> None:
@@ -27,7 +28,7 @@ class Openspace:
                         continue
                     if len(self.unseated) == 0:
                         break
-                    num = randrange(0,len(self.unseated))
+                    num = randrange(0, len(self.unseated))
                     person = self.unseated[num]
                     # Update the lists of seated and unseated people
                     self.update_seats(person, table)
@@ -37,7 +38,7 @@ class Openspace:
                 for table in self.tables:
                     if table.left_capacity == 0:
                         continue
-                    num = randrange(0,len(self.unseated))
+                    num = randrange(0, len(self.unseated))
                     person = self.unseated[num]
                     self.update_seats(person, table)
         else:
@@ -47,14 +48,18 @@ class Openspace:
                         continue
                     if len(self.unseated) == 0:
                         break
-                    num = randrange(0,len(self.unseated))
+                    num = randrange(0, len(self.unseated))
                     person = self.unseated[num]
                     self.update_seats(person, table)
 
+    def update_seats(self, name: str, table):
+        """
+        Update internal state to keep track of seated and unseated people
+        Should be a private method
 
-    def update_seats(self, name, table):
-        # Update internal state to keep track of seated and unseated people
-        # Should be a private method
+        :param name: A str that will be added to a seat
+        :param table: An object from the Table class that will be added to the Openspace
+        """
         self.unseated.remove(name)
         self.seated.append(name)
         table.assign_seat(name)
@@ -70,9 +75,11 @@ class Openspace:
     def store(self, filename: str) -> None:
         """
         Stores the repartition in an Excel file.
+
+        : param filename: A string that will give a name to the saved Excel file
         """
-        arr = empty([5,7], dtype=StringDType())
-                
+        arr = empty([5, 7], dtype=StringDType())
+
         for i, table in enumerate(self.tables):
             for n, seat in enumerate(table.seats):
                 arr[n][i] = seat.occupant
@@ -89,5 +96,5 @@ class Openspace:
             for seat in table.seats:
                 occupant = seat.occupant if seat.occupant else "Empty"
                 output.append(f"  Seat: {occupant}")
-            output.append("") 
+            output.append("")
         return "\n".join(output)
