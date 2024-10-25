@@ -1,5 +1,5 @@
 from typing import List
-from pandas import read_excel, read_csv
+from pandas import read_excel
 
 def read_xls(filename: str) -> List[str]:
     """

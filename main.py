@@ -9,5 +9,4 @@ names = read_xls(file)
 #Initialize the default 6 tables with 4 seats
 room = Openspace(names)
 room.organize()
-print(room)
 room.store("writefile.xlsx")

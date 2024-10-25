@@ -77,7 +77,6 @@ class Openspace:
             for n, seat in enumerate(table.seats):
                 arr[n][i] = seat.occupant
         dataframe = DataFrame(arr)
-        print(dataframe)
         dataframe.to_excel(filename, index=False)
 
     def __str__(self) -> str:
