@@ -5,6 +5,8 @@ from pandas import read_excel
 def read_xls(filename: str) -> List[str]:
     """
     Reads the excel file into a pandas dataframe and returns a list of names.
+
+    :param filename: A str containing the name of the file to be read
     """
     names = []
     excel = read_excel(filename)

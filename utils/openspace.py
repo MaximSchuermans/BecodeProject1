@@ -9,7 +9,7 @@ from numpy.dtypes import StringDType
 
 class Openspace:
 
-    def __init__(self, names: List[str], number_of_tables=6) -> None:
+    def __init__(self, names: List[str], number_of_tables: int = 6) -> None:
         self.tables: List[Table] = [Table() for i in range(0, number_of_tables)]
         self.number_of_tables: int = number_of_tables
         self.seated: List[str] = []
@@ -52,9 +52,13 @@ class Openspace:
                     person = self.unseated[num]
                     self.update_seats(person, table)
 
-    def update_seats(self, name, table):
-        # Update internal state to keep track of seated and unseated people
-        # Should be a private method
+    def update_seats(self, name: str, table: Table):
+        """
+        Updates the seats
+
+        :param name: A str containing the person's name
+        :param table: A table object
+        """
         self.unseated.remove(name)
         self.seated.append(name)
         table.assign_seat(name)
@@ -70,6 +74,8 @@ class Openspace:
     def store(self, filename: str) -> None:
         """
         Stores the repartition in an Excel file.
+
+        :param filename: A str to specify the ouput file name
         """
         arr = empty([5, 7], dtype=StringDType())
 

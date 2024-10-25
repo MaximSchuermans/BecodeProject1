@@ -1,12 +1,14 @@
 # from module import whateveryouneed
 class Seat:
-    def __init__(self, free=False, occupant=None) -> None:
+    def __init__(self, free: bool = False, occupant: str = None) -> None:
         self.free = free
         self.occupant = occupant
 
     def set_occupant(self, name: str) -> bool:
         """
         Allows the program to assign someone a seat if its free
+
+        :param name: A str containing the occupant's name
         """
         if self.free == True:
             self.occupant = name
@@ -60,14 +62,13 @@ class Table:
             return False
         return True
 
-    def assign_seat(self, name) -> None:
+    def assign_seat(self, name: str) -> None:
         """
         places someone at the table
+
+        :param name: A str containing the person's name
         """
-        """if self.has_free_spot() == True:
-            for seat in self.seats:
-                if seat.free == True:
-                    seat.set_occupant(name)"""
+
         self.seats.append(Seat(occupant=name))
         self.capacity -= 1
 
