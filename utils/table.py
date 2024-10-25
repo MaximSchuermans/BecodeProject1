@@ -72,11 +72,8 @@ class Table:
         """
         returns left seats with an integer
         """
-        counter = 0
-        for seat in self.seats:
-            if seat.free == True:
-                counter += 1
-        return counter
+        return self.capacity
+
     def __str__(self) -> str:
         counter = 0
         for seat in self.seats:

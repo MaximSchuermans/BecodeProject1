@@ -26,26 +26,30 @@ class Openspace:
                         continue
                     if len(self.unseated) == 0:
                         break
-                    #person = choice(self.unseated)
                     num = randrange(0,len(self.unseated))
                     person = self.unseated[num]
                     # Update the lists of seated and unseated people
                     self.update_seats(person, table)
-        elif len(self.unseated) % 6 != 1:
-            print("inside elifloop")
-            # Fill the tables with 6 people such that there will be no table with only 1 peron
+        elif len(self.unseated) % 4 != 1:
+            # Fill the tables with 4 people such that there will be no table with only 1 peron
             while len(self.unseated) != 0:
                 for table in self.tables:
                     if table.left_capacity == 0:
                         continue
-                    #person = choice(self.unseated)
-                    num = randrange(0,len(self.unseated)+1)
+                    num = randrange(0,len(self.unseated))
                     person = self.unseated[num]
-                    print(num,person)
                     self.update_seats(person, table)
         else:
-            print("else statesment")
-                    
+            while len(self.unseated) != 0:
+                for table in self.tables:
+                    if table.left_capacity() <= 1:
+                        continue
+                    if len(self.unseated) == 0:
+                        break
+                    num = randrange(0,len(self.unseated))
+                    person = self.unseated[num]
+                    self.update_seats(person, table)
+
 
     def update_seats(self, name, table):
         # Update internal state to keep track of seated and unseated people
