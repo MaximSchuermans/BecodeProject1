@@ -8,7 +8,7 @@ names = read_xls(file)
 print(names)
 
 #Initialize the default 6 tables with 4 seats
-room = Openspace()
-
-print(Room)
+room = Openspace(names)
+room.organize()
+print(room)
 

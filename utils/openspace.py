@@ -1,9 +1,12 @@
-from table import Table
+#from table.py import Table
+from .table import Table
+#from . import table
+#from ./table import Table
 from typing import List
 
 class Openspace:
 
-    def __init__(self, tables: List[Tabel], names: List[str], number_of_tables=6) -> None:
+    def __init__(self, names: List[str], number_of_tables=6) -> None:
         self.tables: List[Table] = [Table() for i in range(0, number_of_tables + 1)]
         self.number_of_tables: int = number_of_tables
         self.seated: List[str] = []
