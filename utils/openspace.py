@@ -6,10 +6,11 @@ from numpy.random import randn
 from numpy import empty
 from numpy.dtypes import StringDType
 
+
 class Openspace:
 
     def __init__(self, names: List[str], number_of_tables=6) -> None:
-        self.tables: List[Table] = [Table() for i in range(0, number_of_tables + 1)]
+        self.tables: List[Table] = [Table() for i in range(0, number_of_tables)]
         self.number_of_tables: int = number_of_tables
         self.seated: List[str] = []
         self.unseated: List[str] = [person for person in names]
@@ -27,7 +28,7 @@ class Openspace:
                         continue
                     if len(self.unseated) == 0:
                         break
-                    num = randrange(0,len(self.unseated))
+                    num = randrange(0, len(self.unseated))
                     person = self.unseated[num]
                     # Update the lists of seated and unseated people
                     self.update_seats(person, table)
@@ -37,7 +38,7 @@ class Openspace:
                 for table in self.tables:
                     if table.left_capacity == 0:
                         continue
-                    num = randrange(0,len(self.unseated))
+                    num = randrange(0, len(self.unseated))
                     person = self.unseated[num]
                     self.update_seats(person, table)
         else:
@@ -47,10 +48,9 @@ class Openspace:
                         continue
                     if len(self.unseated) == 0:
                         break
-                    num = randrange(0,len(self.unseated))
+                    num = randrange(0, len(self.unseated))
                     person = self.unseated[num]
                     self.update_seats(person, table)
-
 
     def update_seats(self, name, table):
         # Update internal state to keep track of seated and unseated people
@@ -60,19 +60,19 @@ class Openspace:
         table.assign_seat(name)
 
     def display(self) -> None:
-        for table_number, table in enumerate(self.tables, start=1):
-            print(f"Table {table_number}:")
+        print(len(self.tables))
+        for i, table in enumerate(self.tables, 1):
+            names = ""
             for seat in table.seats:
-                occupant = seat.occupant if seat.occupant == True else "Empty"
-                print(f"  Seat: {occupant}")
-            print()
+                names = names + seat.occupant + " "
+            print(f"Table {i} contains {4-table.left_capacity()} people(s):", names)
 
     def store(self, filename: str) -> None:
         """
         Stores the repartition in an Excel file.
         """
-        arr = empty([5,7], dtype=StringDType())
-                
+        arr = empty([5, 7], dtype=StringDType())
+
         for i, table in enumerate(self.tables):
             for n, seat in enumerate(table.seats):
                 arr[n][i] = seat.occupant
@@ -89,5 +89,5 @@ class Openspace:
             for seat in table.seats:
                 occupant = seat.occupant if seat.occupant else "Empty"
                 output.append(f"  Seat: {occupant}")
-            output.append("") 
+            output.append("")
         return "\n".join(output)
