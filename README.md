@@ -5,10 +5,12 @@ randomly assigns people to openspace tables.
 
 ## Installation and Usage
 
-The code depends on the pandas package should be installed through a virtual environment:
+The code depends on several packages that should be installed through a virtual environment:
+
+### Linux:
 
 ```sh
 python3 -m venv ./venv
 source ./venv/bin/activate
-pip install pandas
+pip install -r requirements.txt
 ```
