@@ -7,7 +7,6 @@ def read_xls(filename: str) -> List[str]:
     """
     names = []
     excel = read_excel(filename)
-    print("printing dataframe: ", excel)
     for row in excel.itertuples():
         names.append(row[1]) #Append the name to the names list
     return names

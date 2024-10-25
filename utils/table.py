@@ -45,7 +45,7 @@ class Seat:
             return f'Seat is occupied by {self.occupant}'
         
 class Table:
-    def __init__(self, capacity:int) -> None:
+    def __init__(self, capacity:int = 4) -> None:
         self.capacity = capacity
         self.seats = []
         for i in range (0,5):
